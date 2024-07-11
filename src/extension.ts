@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { generateJson, getKeyValue, getVariable } from "./methods";
+import { MESSAGES, SETTINGS } from "./constants";
 
 export function activate(context: vscode.ExtensionContext) {
   console.log(
@@ -16,6 +17,20 @@ export function activate(context: vscode.ExtensionContext) {
           "Open a file first to manipulate the text selections"
         );
 
+        return;
+      }
+
+      const options: vscode.QuickPickItem[] = [
+        { label: MESSAGES, description: "Generate CMS Messages" },
+        { label: SETTINGS, description: "Generate CMS Settings" },
+      ];
+
+      const selectedOption = await vscode.window.showQuickPick(options, {
+        placeHolder: "Select an option",
+        canPickMany: false,
+      });
+
+      if (!selectedOption) {
         return;
       }
 
@@ -40,8 +55,8 @@ export function activate(context: vscode.ExtensionContext) {
               return getKeyValue(variable);
             })
             .filter(({ key }) => key.match(/^[a-zA-Z0-9]+$/));
-          console.log({ keyValues, variables });
-          const json = generateJson(keyValues);
+
+          const json = generateJson(keyValues, selectedOption.label);
 
           if (!keyValues.length || keyValues.length !== variables.length) {
             return vscode.window.showWarningMessage(

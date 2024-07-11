@@ -1,3 +1,4 @@
+import { MESSAGES, SETTINGS } from "./constants";
 import { TSetting } from "./types";
 
 export const getVariable = (text: string): string[] => {
@@ -31,10 +32,10 @@ export const removeStringChars = (text: string): string => {
   return text.slice(1, -1);
 };
 
-export const generateJson = (keyValues: TSetting[]): string => {
+export const generateJson = (keyValues: TSetting[], target: string): string => {
   const payload = {
-    messages: [...keyValues],
-    settings: [],
+    messages: target === MESSAGES ? [...keyValues] : [],
+    settings: target === SETTINGS ? [...keyValues] : [],
   };
 
   return JSON.stringify(payload);
