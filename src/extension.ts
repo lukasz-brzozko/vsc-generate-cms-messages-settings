@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
         for (const selection of selections) {
           const text = editor.document.getText(selection);
           const hasBannedChars = text.match(
-            /[^a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\,\"\'\`\:\=\.\-]\\/
+            /[^a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s\,\"\'\`\:\=\.\-\\]/
           );
 
           if (hasBannedChars) {
