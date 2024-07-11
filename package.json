@@ -1,6 +1,6 @@
 {
   "name": "transform-clipboard-into-cms-messages-settings",
-  "displayName": "Transform clipboard into CMS messages/settings",
+  "displayName": "Transform clipboard into CMS Messages/Settings",
   "description": "",
   "publisher": "Łukasz Brzózko",
   "repository": "https://github.com/lukasz-brzozko/vsc-generate-cms-messages-settings",
